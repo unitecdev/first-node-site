@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一覧画面</title>
+</head>
+<body>
+    <a href="/add.html">追加画面へ</a>
+    <div>コメント一覧</div>
+    <main id="main"></main>
+    <script>
+        window.onload = async () => {
+            const response = await fetch("http://localhost:3000/", { cache: "no-store" });
+            const comments = await response.json()
+            const mainNode = document.getElementById("main");
+            comments.forEach(comment => {
+                const commentNode = document.createElement("div");
+                commentNode.innerHTML = comment.comment;
+                mainNode.appendChild(commentNode);
+            });
+        }
+    </script>
+</body>
+</html>
